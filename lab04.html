@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script>
+        function isLetter(elem,helperMsg){
+        var alpha = /^[a-z]+$/i;
+        if(elem.value.match(alpha)){
+            return true;}
+            else{
+                alert(helperMsg);
+                elem.focus();
+                return false;
+            }
+        }
+        
+        function phone1(elem,helperMsg){
+            var num = /[0-9]{3}-[0-9]{3}-[0-9]{4}/;
+            if (elem.value.match(num)){
+                return true;}
+                else{
+                    alert(helperMsg);
+                    elem.focus();
+                    return false;
+                }
+            }
+
+        function phone2(x){
+            const z = x.toString();
+            let y = "(" ;
+            for (i = 0 ; i<= 2 ; ++i){
+                 y += z[i];}
+            
+            y += ") ";
+            for (i = 4 ; i<= 11 ; ++i){
+                 y += z[i];}
+            x.innerHTML = y;
+            return y;
+        }
+            
+
+        function display(){
+            
+            if (isLetter((document.getElementById('req1')) , 'You must enter your name!'))
+            {
+                var name = document.getElementById('req1').value.toString().toUpperCase();
+                document.getElementById('v1').innerHTML = name; 
+            }
+
+            var add = document.getElementById('req2').value;
+            document.getElementById('v2').innerHTML = add;
+
+            if (phone1((document.getElementById('req3')) ,'Try using the correct format!'))
+            {
+                var pn = document.getElementById('req3').value;
+                document.getElementById('v3').innerHTML = phone2(pn);
+            }
+            }
+
+
+        function cnt(){
+            var a = document.getElementById("txt").value.toString();
+            c = a.length;
+            document.getElementById("t").innerHTML = c;
+        }
+        
+        function cnt2(){
+            var d = 0;
+            var a = document.getElementById("txt").value.toString();
+            var b = /^[a-z]+$/i;
+            for (i=0 ; i<= a.length-1 ; ++i){
+                if (a[i].match(b)){
+                    d += 1 ;
+                }
+            }
+            document.getElementById("t2").innerHTML = d;
+        }
+        const list = [ 'https://www.hackerrank.com/domains/python' 
+        , 'http://www.metrovancouver.org']
+        function add(x){
+            y = document.getElementById('web').value.toString();
+            list.push(y); 
+            var s = '';
+            for (let i = 0 ; i <= list.length - 1 ; ++i)
+            {
+                if (list[i].slice(0,8).match('https://'))
+                {
+                    s += '<i class="material-icons" style="font-size:15px;color:green;">padlock</i> ' + list[i] + "<br>" 
+                    
+                }
+                if (list[i].slice(0,7).match('http://'))
+                {
+                    s += '<i class="material-icons" style="font-size:15px;color:red;">padlock_open</i> ' + list[i] + "<br>" ;
+                      
+                }
+            }
+            
+            document.getElementById('li').innerHTML = s ;
+        }
+
+        </script>
+
+</head>
+
+<body>
+    <p style="
+    border-radius: 10px 50px;margin: 20px; padding: 10px;
+     border:10px solid rgb(104, 2, 117); text-align: center; font-size: xx-large;">
+                Welcome to the site 
+                <span id="v1">Stranger!!</span>!
+                <br>
+                Your Address is 
+                <span id="v2">Unknown</span>
+                <br>
+                Your phone number is 
+                <span id="v3">Unknown</span>
+
+    </p>
+
+     
+     
+    <form style="font-size: x-large ; font-weight: bold; border: 2px solid black;
+    border-radius: 150px ; padding:35px; padding-left: 60px; 
+    background-color: rgb(94, 25, 99); color: white;
+    font-family: Arial, sans-serif;">
+        Enter your name: <input style="background-color: rgb(240, 227, 220); border-radius: 5px;"
+         type="text" id="req1" value="only letter">
+        <br><br>
+        Enter your address: <input type="text" id="req2"
+        style="background-color: rgb(240, 227, 220); border-radius: 5px;">
+        <br><br>
+        Enter your phone number: <input type="text" id= "req3" value="???-???-????"
+        style="background-color: rgb(240, 227, 220); border-radius: 5px; "> 
+
+        <br><br>
+        <div style="text-align: center;">
+        <input style="background-color: rgb(240, 227, 220); border-radius: 5px; text-align: center; " 
+         type="button" onclick= "display()"; value="Value Form";>
+        </div>
+    </form>
+    <br>
+
+    <div style="border: 2px dashed rgb(49, 1, 70) ; padding: 10px;">  
+    <h1 style="text-align: center !important; background-color: rgb(94, 25, 99); color: white;
+                border-radius: 2px 15px; margin-left: 10%; margin-right: 10%;"> Count using textarea</h1>
+    <form>
+        <h1 style="float:left; font-size:large">
+            Number of characters: -<span id="t">13</span>-
+            <br>
+            Number of letters: -<span id="t2">9</span>-
+        </h1>
+        
+        <textarea id="txt" 
+        onkeyup="cnt();cnt2();"
+        style="background-color: rgb(240, 227, 220); 
+        width: 80%;
+        height: 250px;">write here...</textarea>
+        
+    </form>
+    </div>
+    <br>
+    <div style="border: 2px dashed rgb(49, 1, 70) ; padding: 10px;">
+    <h1 style="text-align: center !important; background-color: rgb(94, 25, 99); color: white;
+    border-radius: 2px 15px; margin-left: 10%; margin-right: 10%;"> Check security</h1>
+    <form>
+        <h3> Enter Your Favourite Websites :  </h3>
+        <input type="text" id="web" value = "https or http"
+        style="width: 330px;">
+        <input type="button" 
+        onclick="add(document.getElementById('web'))"
+        value="Add to Fav">
+    </form>
+    <p>
+        <h3 style="border: solid rgb(235, 208, 213);
+        width: 330px;">
+        Bookmark of Your Favourite Websites : </h3>
+        <span id="li" 
+        style="background-color: rgb(245, 236, 237);">
+            <i class="material-icons" 
+            style="font-size:15px;color:green;">padlock</i>
+            https://www.hackerrank.com/domains/python
+        <br>
+            <i class="material-icons" 
+            style="font-size:15px;color:red;">padlock_open</i>
+            http://www.metrovancouver.org
+        <br>
+        </span>
+    
+    </div>
+    
+    </p>
+
+    
+    
+</body>
+
+
+</html>
